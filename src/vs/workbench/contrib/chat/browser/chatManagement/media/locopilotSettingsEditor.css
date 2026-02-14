@@ -1,0 +1,429 @@
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+.locopilot-settings-editor {
+	height: 100%;
+	overflow: hidden;
+	max-width: 1200px;
+	margin: 0 auto;
+	display: flex;
+	flex-direction: column;
+}
+
+.locopilot-settings-editor .locopilot-settings-header {
+	box-sizing: border-box;
+	margin-left: 20px;
+	padding: 10px 15px 5px 15px;
+	border-bottom: 1px solid var(--vscode-settings-headerBorder);
+	flex-shrink: 0;
+}
+
+.locopilot-settings-editor .split-view-container {
+	flex: 1;
+	min-height: 0;
+	position: relative;
+}
+
+.locopilot-settings-editor .sidebar-view,
+.locopilot-settings-editor .contents-view {
+	height: 100%;
+	overflow: hidden;
+}
+
+.locopilot-settings-editor .contents-container {
+	height: 100%;
+	overflow-y: auto;
+	overflow-x: hidden;
+	padding-bottom: 24px;
+}
+
+.locopilot-settings-editor .sidebar-container {
+	padding-left: 20px;
+	padding-top: 15px;
+	height: 100%;
+	overflow: hidden;
+	box-sizing: border-box;
+}
+
+.locopilot-settings-editor .sidebar-container .section-list-item {
+	padding-left: 20px;
+	display: flex;
+	align-items: center;
+}
+
+.locopilot-settings-editor .sidebar-container .section-list-item > .section-list-item-label {
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+.locopilot-settings-editor .header-title-container {
+	display: flex;
+	align-items: center;
+	justify-content: flex-start;
+	gap: 12px;
+	margin-bottom: 0;
+}
+
+/* Brand logo: Bixbite letterpress (same as welcome/empty editor group). Theme-aware via background-image. */
+.locopilot-settings-editor .locopilot-settings-brand-logo {
+	width: 32px;
+	height: 32px;
+	min-width: 32px;
+	min-height: 32px;
+	background-image: url('../../../../../browser/parts/editor/media/letterpress-light.svg');
+	background-size: contain;
+	background-position: center;
+	background-repeat: no-repeat;
+}
+
+.monaco-workbench.vs-dark .locopilot-settings-editor .locopilot-settings-brand-logo,
+.monaco-workbench.hc-black .locopilot-settings-editor .locopilot-settings-brand-logo {
+	background-image: url('../../../../../browser/parts/editor/media/letterpress-dark.svg');
+}
+
+.monaco-workbench.hc-light .locopilot-settings-editor .locopilot-settings-brand-logo {
+	background-image: url('../../../../../browser/parts/editor/media/letterpress-hcLight.svg');
+}
+
+.locopilot-settings-editor .locopilot-settings-editor-title {
+	font-size: 26px;
+	font-weight: 600;
+	color: var(--vscode-foreground);
+}
+
+.locopilot-settings-editor .locopilot-settings-body {
+	padding: 15px;
+	min-height: 100%;
+	box-sizing: border-box;
+}
+
+.locopilot-settings-editor .locopilot-settings-panel {
+	display: none;
+	flex-direction: column;
+	gap: 12px;
+}
+
+.locopilot-settings-editor .locopilot-settings-panel .panel-title {
+	font-size: 18px;
+	font-weight: 600;
+	color: var(--vscode-foreground);
+}
+
+.locopilot-settings-editor .locopilot-settings-panel .panel-description {
+	font-size: 13px;
+	color: var(--vscode-descriptionForeground);
+	line-height: 1.4;
+}
+
+.locopilot-settings-editor .locopilot-settings-panel .panel-actions {
+	margin-top: 8px;
+}
+
+.locopilot-settings-editor .add-models-panel,
+.locopilot-settings-editor .list-models-panel {
+	display: block;
+}
+
+/* Agent settings */
+.locopilot-settings-editor .agent-settings-panel {
+	display: flex;
+	flex-direction: column;
+	gap: 20px;
+}
+
+.locopilot-settings-editor .agent-setting-row {
+	display: flex;
+	align-items: center;
+	gap: 12px;
+	flex-wrap: wrap;
+}
+
+.locopilot-settings-editor .locopilot-setting-label {
+	font-size: 13px;
+	font-weight: 600;
+	color: var(--vscode-foreground);
+	min-width: 180px;
+}
+
+/* Agent setting rows: fixed label width so max iteration, toggle, and path input align in one column */
+.locopilot-settings-editor .agent-settings-panel .agent-setting-row > .locopilot-setting-label {
+	width: 260px;
+	min-width: 260px;
+	flex-shrink: 0;
+}
+
+.locopilot-settings-editor .agent-setting-input-wrap {
+	width: 80px;
+}
+
+/* Wider input for path fields (e.g. Llama.cpp server path); +100px from previous for better path entry */
+.locopilot-settings-editor .agent-setting-path-wrap {
+	min-width: 300px;
+	max-width: 520px;
+}
+
+.locopilot-settings-editor .agent-setting-toggle-wrap {
+	display: flex;
+	align-items: center;
+}
+
+/* On/off switch style for "Auto approve terminal commands" (not checkbox) */
+.locopilot-settings-editor .agent-setting-switch-wrap .monaco-custom-toggle {
+	width: 44px;
+	height: 24px;
+	min-width: 44px;
+	border-radius: 12px;
+	border: 1px solid var(--vscode-input-border);
+	background: var(--vscode-input-background);
+	position: relative;
+	padding: 0;
+	margin: 0;
+	float: none;
+	box-sizing: border-box;
+	transition: background-color 0.15s ease, border-color 0.15s ease;
+}
+.locopilot-settings-editor .agent-setting-switch-wrap .monaco-custom-toggle::after {
+	content: '';
+	position: absolute;
+	top: 50%;
+	left: 3px;
+	width: 18px;
+	height: 18px;
+	margin-top: -9px;
+	border-radius: 50%;
+	background: var(--vscode-foreground);
+	opacity: 0.9;
+	transition: transform 0.15s ease;
+	box-sizing: border-box;
+}
+.locopilot-settings-editor .agent-setting-switch-wrap .monaco-custom-toggle.checked {
+	background: var(--vscode-inputOption-activeBackground);
+	border-color: var(--vscode-inputOption-activeBorder);
+}
+.locopilot-settings-editor .agent-setting-switch-wrap .monaco-custom-toggle.checked::after {
+	transform: translateX(21px);
+}
+.locopilot-settings-editor .agent-setting-switch-wrap .monaco-custom-toggle:hover {
+	background-color: var(--vscode-inputOption-hoverBackground);
+}
+.locopilot-settings-editor .agent-setting-switch-wrap .monaco-custom-toggle.checked:hover {
+	background-color: var(--vscode-inputOption-activeBackground);
+}
+
+/* Match main Settings editor (e.g. Text Editor) control styling */
+.locopilot-settings-editor .monaco-select-box {
+	height: 26px;
+	padding: 2px 6px;
+	font: inherit;
+	border-radius: 4px;
+}
+
+.locopilot-settings-editor .monaco-inputbox {
+	min-height: 22px;
+	padding: 2px 6px;
+	font: inherit;
+	border-radius: 4px;
+	box-sizing: border-box;
+}
+
+.locopilot-settings-editor .monaco-inputbox .input {
+	padding: 2px 6px;
+	border-radius: 4px;
+}
+
+.locopilot-settings-editor .agent-setting-input-wrap .monaco-inputbox {
+	width: 100%;
+	border: 1px solid var(--vscode-input-border);
+	border-radius: 4px;
+}
+
+.locopilot-settings-editor .agent-setting-input-wrap .monaco-inputbox input {
+	border: none;
+}
+
+.locopilot-settings-editor .agent-setting-block {
+	display: flex;
+	flex-direction: column;
+	gap: 8px;
+}
+
+.locopilot-settings-editor .agent-setting-block-header {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 12px;
+	flex-wrap: wrap;
+}
+
+.locopilot-settings-editor .agent-setting-block-header .locopilot-setting-label {
+	min-width: 0;
+}
+
+/* Single formatted box: shows rendered markdown; click to edit (textarea overlay) */
+.locopilot-settings-editor .locopilot-prompt-box {
+	position: relative;
+	min-height: 180px;
+}
+
+.locopilot-settings-editor .locopilot-prompt-formatted {
+	position: absolute;
+	inset: 0;
+	overflow: auto;
+	padding: 8px;
+	border: 1px solid var(--vscode-input-border);
+	border-radius: 4px;
+	background: var(--vscode-input-background);
+	color: var(--vscode-input-foreground);
+	font-size: 13px;
+	line-height: 1.5;
+	cursor: text;
+	box-sizing: border-box;
+}
+
+.locopilot-settings-editor .locopilot-prompt-formatted.rendered-markdown,
+.locopilot-settings-editor .locopilot-prompt-formatted .rendered-markdown {
+	font-size: 13px;
+}
+
+.locopilot-settings-editor .locopilot-prompt-formatted p {
+	margin: 0 0 0.5em 0;
+}
+
+.locopilot-settings-editor .locopilot-prompt-formatted p:last-child {
+	margin-bottom: 0;
+}
+
+.locopilot-settings-editor .locopilot-prompt-formatted code {
+	background: var(--vscode-textBlockQuote-background);
+	padding: 2px 6px;
+	border-radius: 4px;
+	font-family: var(--monaco-monospace-font);
+}
+
+.locopilot-settings-editor .locopilot-prompt-formatted ul,
+.locopilot-settings-editor .locopilot-prompt-formatted ol {
+	margin: 0.5em 0;
+	padding-left: 1.5em;
+}
+
+.locopilot-settings-editor .locopilot-prompt-formatted-hidden {
+	display: none;
+}
+
+.locopilot-settings-editor .locopilot-prompt-textarea {
+	position: absolute;
+	inset: 0;
+	width: 100%;
+	min-height: 180px;
+	resize: vertical;
+	font-family: var(--monaco-monospace-font);
+	font-size: 12px;
+	line-height: 1.5;
+	padding: 8px;
+	border: 1px solid var(--vscode-input-border);
+	border-radius: 4px;
+	background: var(--vscode-input-background);
+	color: var(--vscode-input-foreground);
+	box-sizing: border-box;
+}
+
+.locopilot-settings-editor .locopilot-prompt-textarea:focus {
+	outline: 1px solid var(--vscode-focusBorder);
+	outline-offset: -1px;
+}
+
+.locopilot-settings-editor .locopilot-prompt-textarea-hidden {
+	visibility: hidden;
+	pointer-events: none;
+}
+
+.locopilot-settings-editor .locopilot-prompt-formatted.locopilot-prompt-is-default {
+	opacity: 0.6;
+	font-style: italic;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	text-align: center;
+}
+
+.locopilot-settings-editor .model-secondary-settings {
+	padding-left: 12px;
+	color: var(--vscode-descriptionForeground);
+}
+
+.locopilot-settings-editor .model-max-input-container,
+.locopilot-settings-editor .model-max-output-container {
+	display: flex;
+	align-items: center;
+}
+
+.locopilot-settings-editor .model-max-input-label,
+.locopilot-settings-editor .model-max-output-label {
+	margin-right: 4px;
+	opacity: 0.8;
+}
+
+/* Agent settings footer: Cancel (left), Restore + Save (right); buttons only as wide as text */
+.locopilot-settings-editor .agent-setting-footer {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 12px;
+	margin-top: 16px;
+	padding-top: 16px;
+	border-top: 1px solid var(--vscode-settings-headerBorder);
+}
+
+.locopilot-settings-editor .agent-setting-footer .monaco-button {
+	flex: 0 0 auto;
+	width: max-content;
+	min-width: max-content;
+}
+
+/* Push Restore and Save to the right, keep Cancel on the left */
+.locopilot-settings-editor .agent-setting-footer .monaco-button:nth-child(2) {
+	margin-left: auto;
+}
+
+/* Add model form: token fields with K suffix */
+.locopilot-settings-editor .form-input-with-suffix,
+.add-custom-model-editor .form-input-with-suffix {
+	display: flex;
+	align-items: center;
+	gap: 6px;
+}
+
+.locopilot-settings-editor .form-input-suffix,
+.add-custom-model-editor .form-input-suffix {
+	font-size: 13px;
+	color: var(--vscode-foreground);
+	font-weight: 500;
+}
+
+.locopilot-settings-editor .form-field-tokens .form-input-container,
+.add-custom-model-editor .form-field-tokens .form-input-container {
+	max-width: 120px;
+}
+
+/* LoCoPilot Settings tab icon: Bixbite logo (black in light theme, white in dark) - same as Welcome */
+.monaco-workbench .part.editor > .content .editor-group-container > .title .tabs-container > .tab .tab-label .monaco-icon-label-iconpath.codicon-locopilot-settings-editor-label-icon {
+	font-size: 0;
+	width: 16px;
+	height: 16px;
+	min-width: 16px;
+	background-image: url('../../../../../browser/parts/editor/media/letterpress-light.svg');
+	background-size: contain;
+	background-position: center;
+	background-repeat: no-repeat;
+}
+
+.monaco-workbench .part.editor > .content .editor-group-container > .title .tabs-container > .tab .tab-label .monaco-icon-label-iconpath.codicon-locopilot-settings-editor-label-icon::before {
+	content: '' !important;
+}
+
+.monaco-workbench.vs-dark .part.editor > .content .editor-group-container > .title .tabs-container > .tab .tab-label .monaco-icon-label-iconpath.codicon-locopilot-settings-editor-label-icon,
+.monaco-workbench.hc-black .part.editor > .content .editor-group-container > .title .tabs-container > .tab .tab-label .monaco-icon-label-iconpath.codicon-locopilot-settings-editor-label-icon {
+	background-image: url('../../../../../browser/parts/editor/media/letterpress-dark.svg');
+}

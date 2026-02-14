@@ -1,0 +1,70 @@
+.add-custom-model-editor {
+	display: flex;
+	flex-direction: column;
+	padding: 20px 20px 40px;
+}
+
+.add-custom-model-form {
+	max-width: 600px;
+	margin: 0 auto;
+	width: 100%;
+}
+
+.form-title {
+	margin: 0 0 30px 0;
+	font-size: 24px;
+	font-weight: 600;
+}
+
+.form-field {
+	margin-bottom: 24px;
+}
+
+.form-label {
+	display: block;
+	margin-bottom: 8px;
+	font-size: 13px;
+	font-weight: 600;
+	color: var(--vscode-foreground);
+}
+
+.form-input-container {
+	width: 100%;
+	min-width: 400px;
+	max-width: 400px;
+}
+
+/* Match main Settings editor (e.g. Text Editor) control sizing and look */
+.form-input-container .monaco-inputbox {
+	width: 100%;
+	min-height: 22px;
+	padding: 2px 6px;
+	font: inherit;
+	border-radius: 4px;
+	box-sizing: border-box;
+}
+
+.form-input-container .monaco-inputbox .input {
+	border-radius: 4px;
+}
+
+.form-input-container .monaco-select-box {
+	width: 100%;
+	height: 26px;
+	padding: 2px 6px;
+	font: inherit;
+	border-radius: 4px;
+	box-sizing: border-box;
+}
+
+.form-actions {
+	margin-top: 32px;
+	display: flex;
+	gap: 12px;
+}
+
+.form-actions .monaco-button {
+	width: 100%;
+	min-width: 400px;
+	max-width: 400px;
+}

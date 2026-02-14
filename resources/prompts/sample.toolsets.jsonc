@@ -1,0 +1,23 @@
+// Place your tool sets here...
+// Example:
+// {
+// 	"toolSetName": {
+// 		"tools": [
+// 			"someTool",
+// 			"anotherTool"
+// 		],
+// 		"description": "description",
+// 		"icon": "tools"
+// 	}
+// }
+
+{
+	"exampleToolSet": {
+		"tools": [
+			"vscode_readFile",
+			"vscode_listDirectory"
+		],
+		"description": "Read files and list directories in the workspace",
+		"icon": "file-directory"
+	}
+}

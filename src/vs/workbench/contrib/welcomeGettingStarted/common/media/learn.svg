@@ -1,0 +1,16 @@
+<svg viewBox="0 0 351 225" fill="none" xmlns="http://www.w3.org/2000/svg">
+	<!-- Neutral learn/tutorial illustration: gradient background and play icon (no VS Code branding) -->
+	<rect width="351" height="225" fill="#1E1E1E"/>
+	<rect width="351" height="120" fill="url(#learnGrad)"/>
+	<defs>
+		<linearGradient id="learnGrad" x1="175" y1="0" x2="175" y2="120" gradientUnits="userSpaceOnUse">
+			<stop stop-color="#2D5A7B"/>
+			<stop offset="1" stop-color="#1a3650"/>
+		</linearGradient>
+	</defs>
+	<!-- Play button -->
+	<circle cx="175" cy="165" r="36" fill="rgba(0,0,0,0.5)"/>
+	<path d="M163 152v26l20-13-20-13z" fill="white"/>
+	<!-- "Learn" label -->
+	<text x="175" y="215" font-family="system-ui, sans-serif" font-size="18" font-weight="500" fill="#cccccc" text-anchor="middle">Learn</text>
+</svg>

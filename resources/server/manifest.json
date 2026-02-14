@@ -1,0 +1,20 @@
+{
+	"name": "LoCoPilot",
+	"short_name": "LoCoPilot",
+	"start_url": "/",
+	"lang": "en-US",
+	"display": "standalone",
+	"display_override": ["window-controls-overlay"],
+	"icons": [
+		{
+			"src": "locopilot-192.png",
+			"type": "image/png",
+			"sizes": "192x192"
+		},
+		{
+			"src": "locopilot-512.png",
+			"type": "image/png",
+			"sizes": "512x512"
+		}
+	]
+}
